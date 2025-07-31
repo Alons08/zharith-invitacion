@@ -11,6 +11,52 @@ if (navigator.userAgent.toLowerCase().indexOf("chrome") > -1) {
 	document.documentElement.style.setProperty("--time-chrome", `9s`);
 }
 
+// Control de música de fondo
+document.addEventListener('DOMContentLoaded', function() {
+  var music = document.getElementById('backgroundMusic');
+  
+  // Intentar reproducir la música (los navegadores modernos bloquean la reproducción automática)
+  function playMusic() {
+    var promise = music.play();
+    
+    if (promise !== undefined) {
+      promise.catch(error => {
+        // La reproducción automática fue bloqueada
+        console.log("Reproducción automática bloqueada:", error);
+        // Mostrar un botón para permitir al usuario iniciar la música
+        showMusicButton();
+      });
+    }
+  }
+  
+  function showMusicButton() {
+  var musicButton = document.createElement('div');
+  musicButton.id = 'musicButton';
+  musicButton.innerHTML = '▶ Reproducir música';
+  musicButton.style.position = 'fixed';
+  musicButton.style.bottom = '20px';  // Reducir espacio inferior
+  musicButton.style.right = '20px';    // Cambiar a derecha
+  musicButton.style.backgroundColor = '#e1b100';
+  musicButton.style.color = 'white';
+  musicButton.style.padding = '10px 15px';
+  musicButton.style.borderRadius = '5px';
+  musicButton.style.cursor = 'pointer';
+  musicButton.style.zIndex = '10';    // Z-index más bajo
+  musicButton.style.fontFamily = '"Montserrat", sans-serif';
+  musicButton.style.fontSize = '14px';
+  
+  musicButton.addEventListener('click', function() {
+    music.play();
+    musicButton.style.display = 'none';
+  });
+  
+  document.body.appendChild(musicButton);
+}
+  
+  // Esperar a que la animación inicial termine antes de reproducir música
+  setTimeout(playMusic, 9000); // 9 segundos para coincidir con tu animación inicial
+});
+
 ////  Cuenta regresiva
 var fechaCuentaRegresiva = "10/04/2025 19:00:00";
 
