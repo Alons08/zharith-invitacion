@@ -48,6 +48,13 @@ body {
 	position: relative;
 }
 
+@media (min-width: 1024px) {
+  .nombre-zharith {
+	top: -40px;
+	position: relative;
+  }
+}
+
 .nombre-zharith::before {
 	content: '';
 	position: absolute;
@@ -595,97 +602,97 @@ a.active {
 
 /* Agrega esto al final de tu CSS */
 .despedida {
-    flex: 3 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	flex: 3 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .mensaje-despedida {
-    font-size: min(4.2vw, 28px);
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: center;
+	font-size: min(4.2vw, 28px);
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+	color: var(--gray);
+	line-height: 1.6;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .nombre-destacado {
-    font-size: min(5vw, 32px);
-    color: var(--gold);
-    font-weight: 500;
+	font-size: min(5vw, 32px);
+	color: var(--gold);
+	font-weight: 500;
 }
 
 .nombre-padres {
-    font-style: italic;
+	font-style: italic;
 }
 
 .corazon {
-    font-size: min(6vw, 40px);
-    animation: latido 1.5s infinite;
+	font-size: min(6vw, 40px);
+	animation: latido 1.5s infinite;
 }
 
 @keyframes latido {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+	0% { transform: scale(1); }
+	50% { transform: scale(1.2); }
+	100% { transform: scale(1); }
 }
 
 /* Mantiene el espacio del botón aunque esté vacío */
 .espacio_btn {
-    min-height: 60px; /* Ajusta según necesites */
+	min-height: 60px; /* Ajusta según necesites */
 }
 
 /* Estilos para la sección de colores prohibidos */
 .color-restriction {
-    flex: 3 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
+	flex: 3 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 90%;
 }
 
 .color-restriction p {
-    font-size: min(4vw, 24px);
-    margin-bottom: 20px;
-    text-align: center;
+	font-size: min(4vw, 24px);
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .prohibited-colors {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
 }
 
 .prohibited-color {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .color-sample {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    margin-bottom: 8px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	border: 3px solid #fff;
+	box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+	margin-bottom: 8px;
 }
 
 .prohibited-color span {
-    font-size: min(3.5vw, 18px);
-    color: var(--gray);
-    font-weight: 500;
+	font-size: min(3.5vw, 18px);
+	color: var(--gray);
+	font-weight: 500;
 }
 
 .thank-you {
-    font-size: min(4vw, 22px);
-    color: var(--gold);
-    margin-top: 15px;
-    font-style: italic;
+	font-size: min(4vw, 22px);
+	color: var(--gold);
+	margin-top: 15px;
+	font-style: italic;
 }
