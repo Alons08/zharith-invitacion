@@ -26,7 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Evento para abrir el sobre
     envelope.addEventListener('click', function() {
-        this.classList.add('open');
+        // Agregar clase de clicked para activar la animación
+        this.classList.add('clicked');
+        
+        // Crear efecto de partículas
+        createParticles();
         
         // Esperar a que termine la animación para mostrar el contenido
         setTimeout(() => {
@@ -42,8 +46,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 initCountdown();
                 initCalendar();
             }, 500);
-        }, 800);
+        }, 1200); // Aumentado para coincidir con la duración de la animación
     });
+    
+    // Función para crear efecto de partículas
+    function createParticles() {
+        const particlesContainer = document.getElementById('particlesContainer');
+        const particleCount = 15;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Posición aleatoria alrededor del centro
+            const angle = (i / particleCount) * 2 * Math.PI;
+            const radius = Math.random() * 100 + 50;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            
+            particle.style.left = '50%';
+            particle.style.top = '50%';
+            particle.style.setProperty('--end-x', x + 'px');
+            particle.style.setProperty('--end-y', y + 'px');
+            
+            // Color aleatorio entre los colores de la paleta
+            const colors = ['#FFD166', '#7b2cbf', '#9d4edd', '#ff9e00'];
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Agregar animación personalizada
+            particle.style.animation = `particleMove 1.5s ease-out ${i * 0.05}s forwards`;
+            
+            particlesContainer.appendChild(particle);
+            
+            // Remover partícula después de la animación
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 1500 + (i * 50));
+        }
+    }
     
     // Control del reproductor de música
     playButton.addEventListener('click', function() {
@@ -63,19 +105,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Botón de mapa
     mapButton.addEventListener('click', function() {
-        // Reemplaza con tu enlace de Google Maps
-        window.open('https://goo.gl/maps/ejemplo', '_blank');
+        // Enlace a La Cochera Campestre en Chimbote
+        window.open('https://www.google.com/maps/place/LA+COCHERA+CAMPESTRE/@-9.0499497,-78.5720138,17z/data=!3m1!4b1!4m6!3m5!1s0x91ab80d69f66b42f:0xb3beae3ee8265684!8m2!3d-9.0499497!4d-78.5720138!16s%2Fg%2F11cm0c9wsc?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D', '_blank');
     });
     
     // Botón de confirmación
     rsvpButton.addEventListener('click', function() {
         // Reemplaza con tu enlace de Google Forms
-        window.open('https://forms.gle/ejemplo', '_blank');
+        window.open('https://forms.gle/vbh7YkmG73XwJBCg8', '_blank');
     });
     
     // Inicializar el countdown
     function initCountdown() {
-        const eventDate = new Date('October 4, 2025 19:00:00').getTime();
+        const eventDate = new Date('October 4, 2025 19:30:00').getTime();
         
         const countdown = setInterval(function() {
             const now = new Date().getTime();

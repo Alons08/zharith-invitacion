@@ -45,7 +45,7 @@ h1, h2, h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    background: linear-gradient(135deg, #8b5fd1, #3d0a5b);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,29 +57,46 @@ h1, h2, h3 {
 
 .invitation-label {
     position: absolute;
-    top: 20%;
-    background-color: var(--accent-color);
-    color: var(--primary-dark);
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: rotate(-5deg);
-    animation: floatLabel 4s ease-in-out infinite;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
 }
 
-@keyframes floatLabel {
-    0%, 100% { transform: rotate(-5deg) translateY(0); }
-    50% { transform: rotate(-5deg) translateY(-10px); }
+.label-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.6),
+        0 0 30px rgba(255, 215, 0, 0.4);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    line-height: 1;
 }
+
+.label-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #FFD700;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 15px rgba(255, 215, 0, 0.5),
+        0 0 25px rgba(255, 215, 0, 0.3);
+    letter-spacing: 2px;
+}
+
 
 .envelope-container {
     perspective: 1000px;
     width: 320px;
-    height: 200px;
+    height: 240px;
     position: relative;
-    margin-top: 40px;
+    margin-top: 60px;
     filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4));
 }
 
@@ -87,111 +104,166 @@ h1, h2, h3 {
     position: relative;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .envelope:hover {
     transform: scale(1.05);
 }
 
-.envelope-front, .envelope-back {
-    position: absolute;
+.envelope-image {
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-}
-
-.envelope-front {
-    transform-origin: top;
-    transition: transform 0.8s ease;
+    object-fit: contain;
+    transition: all 0.4s ease;
+    filter: brightness(1) saturate(1);
     z-index: 2;
-    background: linear-gradient(135deg, var(--envelope-color) 0%, #a0925c 100%);
-    border-radius: 5px;
-    box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.2),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
 }
 
-.envelope.open .envelope-front {
-    transform: rotateX(180deg);
+.envelope:hover .envelope-image {
+    filter: brightness(1.1) saturate(1.2);
+    transform: rotateY(5deg) rotateX(-2deg);
 }
 
-.envelope-cover {
+.envelope.clicked .envelope-image {
+    animation: envelopeOpen 1.2s ease-in-out forwards;
+}
+
+.envelope-glow {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 140px solid transparent;
-    border-right: 140px solid transparent;
-    border-top: 90px solid var(--envelope-color);
-    transform-origin: top;
-    z-index: 3;
-    filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.1));
-    transition: all 0.3s ease;
-}
-
-.envelope:hover .envelope-cover {
-    filter: drop-shadow(0 -3px 6px rgba(0,0,0,0.2));
-    transform: translateY(-2px);
-}
-
-.envelope-paper {
-    position: absolute;
-    width: 260px;
-    height: 160px;
-    background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
-    top: 10px;
-    left: 10px;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 
-        inset 0 0 10px rgba(0,0,0,0.05),
-        0 4px 8px rgba(0,0,0,0.1);
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(123, 44, 191, 0.2) 50%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
     z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid rgba(0,0,0,0.05);
+    transition: opacity 0.3s ease;
 }
 
-.envelope-paper::before {
-    content: "";
+.envelope:hover .envelope-glow {
+    opacity: 1;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.envelope.clicked .envelope-glow {
+    animation: explosionGlow 1.2s ease-out forwards;
+}
+
+@keyframes envelopeOpen {
+    0% {
+        transform: scale(1) rotateY(0deg);
+        filter: brightness(1.1) saturate(1.2);
+    }
+    25% {
+        transform: scale(1.1) rotateY(10deg);
+        filter: brightness(1.3) saturate(1.4);
+    }
+    50% {
+        transform: scale(1.2) rotateY(20deg) rotateX(10deg);
+        filter: brightness(1.5) saturate(1.6) hue-rotate(30deg);
+    }
+    75% {
+        transform: scale(1.3) rotateY(30deg) rotateX(15deg);
+        filter: brightness(1.7) saturate(1.8) hue-rotate(60deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.5) rotateY(45deg) rotateX(20deg);
+        filter: brightness(2) saturate(2) hue-rotate(90deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes explosionGlow {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(123, 44, 191, 0.2) 50%, transparent 70%);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(2);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 215, 0, 0.6) 30%, rgba(123, 44, 191, 0.4) 60%, transparent 80%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3);
+        background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 215, 0, 0.8) 20%, rgba(123, 44, 191, 0.6) 40%, transparent 60%);
+    }
+}
+
+.particles-container {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, transparent 45%, rgba(123, 44, 191, 0.1) 45%, rgba(123, 44, 191, 0.1) 55%, transparent 55%);
+    pointer-events: none;
+    z-index: 3;
 }
 
-.envelope-paper::after {
-    content: "XV";
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    animation: sparkle 3s ease-in-out infinite;
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
 }
 
-@keyframes sparkle {
-    0%, 100% { 
-        opacity: 0.8; 
-        transform: scale(1);
+.envelope.clicked .particle {
+    animation: particleExplosion 1.5s ease-out forwards;
+}
+
+@keyframes particleExplosion {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
     }
-    50% { 
-        opacity: 1; 
-        transform: scale(1.05);
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
     }
 }
 
-.envelope-back {
-    background-color: var(--envelope-shadow);
-    border-radius: 5px;
-    z-index: 1;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+@keyframes particleMove {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(0.2);
+    }
 }
 
 .instructions {
@@ -203,6 +275,12 @@ h1, h2, h3 {
     color: var(--white);
     animation: pulse 2s infinite;
     z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.envelope.clicked ~ .instructions {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
 }
 
 .instructions p {
@@ -458,13 +536,27 @@ h1, h2, h3 {
 }
 
 .parents-name {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.parents-name p {
     font-size: 1.3rem;
     color: var(--primary-dark);
-    margin-bottom: 15px;
     font-weight: 500;
     font-family: 'Crimson Text', serif;
     font-style: italic;
     letter-spacing: 0.5px;
+    margin: 8px 0;
+    line-height: 1.2;
+}
+
+.parents-name .conjunction {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 400;
+    margin: 5px 0;
+    opacity: 0.8;
 }
 
 .invitation-line {
@@ -523,6 +615,10 @@ h1, h2, h3 {
 .gallery-section,
 .rsvp-section {
     margin: 60px 0;
+}
+
+.location-section {
+    text-align: center;
 }
 
 .section-title {
@@ -688,27 +784,46 @@ h1, h2, h3 {
 }
 
 .map-btn {
-    background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
-    color: var(--text-color);
+    background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+    color: var(--white);
     border: none;
-    padding: 12px 30px;
+    padding: 15px 35px;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: block;
-    margin: 20px auto;
+    display: inline-block;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(255, 158, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(123, 44, 191, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto;
+    text-decoration: none;
 }
 
 .map-btn i {
     margin-right: 10px;
+    vertical-align: middle;
 }
 
 .map-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 158, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(123, 44, 191, 0.4);
+}
+
+.map-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.map-btn:hover::after {
+    left: 100%;
 }
 
 /* Código de vestimenta */
@@ -775,17 +890,6 @@ h1, h2, h3 {
     position: relative;
 }
 
-.color-restrictions::before {
-    content: "⚠️";
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 0 10px;
-    font-size: 1.5rem;
-}
-
 .color-restrictions p {
     font-weight: 700;
     font-size: 1.1rem;
@@ -826,7 +930,7 @@ h1, h2, h3 {
 .color-box::before {
     content: "❌";
     position: absolute;
-    top: 8px;
+    top: 4px;
     right: 8px;
     font-size: 1.2rem;
     animation: pulse 2s infinite;
@@ -853,28 +957,33 @@ h1, h2, h3 {
 /* Galería */
 .carousel-container {
     position: relative;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 16/11;
 }
 
 .carousel {
     display: flex;
     transition: transform 0.5s ease;
+    height: 100%;
 }
 
 .carousel-item {
     min-width: 100%;
     position: relative;
+    height: 100%;
 }
 
 .carousel-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    border-radius: 10px;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .carousel-btn {
@@ -940,6 +1049,7 @@ h1, h2, h3 {
 .rsvp-text {
     margin: 20px 0;
     font-size: 1.1rem;
+    text-align: center;
 }
 
 .rsvp-btn {
@@ -951,16 +1061,18 @@ h1, h2, h3 {
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(123, 44, 191, 0.3);
     position: relative;
     overflow: hidden;
+    margin-top: 20px;
+    text-decoration: none;
 }
 
 .rsvp-btn i {
     margin-right: 10px;
+    vertical-align: middle;
 }
 
 .rsvp-btn:hover {
@@ -1033,6 +1145,22 @@ h1, h2, h3 {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    .label-title {
+        font-size: 3.2rem;
+        letter-spacing: 2px;
+    }
+    
+    .label-name {
+        font-size: 3.0rem;
+        letter-spacing: 1px;
+    }
+    
+    .envelope-container {
+        width: 280px;
+        height: 200px;
+        margin-top: 50px;
+    }
+    
     .countdown-section,
     .calendar-section,
     .location-section,
@@ -1070,8 +1198,12 @@ h1, h2, h3 {
         top: 25px;
     }
     
-    .parents-name {
-        font-size: 1.4rem;
+    .parents-name p {
+        font-size: 1.8rem;
+    }
+    
+    .parents-name .conjunction {
+        font-size: 1.5rem;
     }
     
     .invitation-line {
@@ -1084,7 +1216,7 @@ h1, h2, h3 {
     }
     
     .birthday-girl {
-        font-size: 1.9rem;
+        font-size: 2.2rem;
     }
     
     .section-title {
@@ -1139,6 +1271,16 @@ h1, h2, h3 {
 }
 
 @media (max-width: 480px) {
+    .label-title {
+        font-size: 2.8rem;
+        letter-spacing: 1px;
+    }
+    
+    .label-name {
+        font-size: 2.5rem;
+        letter-spacing: 0.5px;
+    }
+    
     .countdown-section,
     .calendar-section,
     .location-section,
@@ -1187,8 +1329,12 @@ h1, h2, h3 {
         top: 20px;
     }
     
-    .parents-name {
-        font-size: 1.3rem;
+    .parents-name p {
+        font-size: 1.7rem;
+    }
+    
+    .parents-name .conjunction {
+        font-size: 1.4rem;
     }
     
     .invitation-line {
@@ -1201,7 +1347,7 @@ h1, h2, h3 {
     }
     
     .birthday-girl {
-        font-size: 1.7rem;
+        font-size: 2.0rem;
     }
     
     .section-title {
@@ -1243,7 +1389,8 @@ h1, h2, h3 {
         font-size: 1rem;
     }
     
-    .rsvp-btn {
+    .rsvp-btn,
+    .map-btn {
         padding: 12px 25px;
         font-size: 1rem;
     }
@@ -1267,12 +1414,13 @@ h1, h2, h3 {
     }
     
     .forbidden-colors {
-        gap: 12px;
+        gap: 8px;
+        flex-wrap: nowrap;
     }
     
     .color-box {
-        width: 75px;
-        height: 75px;
+        width: 70px;
+        height: 65px;
         border-radius: 12px;
     }
     

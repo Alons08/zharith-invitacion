@@ -11,14 +11,15 @@
 <body>
     <!-- Pantalla inicial con sobre -->
     <div class="envelope-screen" id="envelopeScreen">
-        <div class="invitation-label">Invitación Especial</div>
+        <div class="invitation-label">
+            <div class="label-title">Mis XV</div>
+            <div class="label-name">Zharith</div>
+        </div>
         <div class="envelope-container">
             <div class="envelope" id="envelope">
-                <div class="envelope-front">
-                    <div class="envelope-cover"></div>
-                    <div class="envelope-paper"></div>
-                </div>
-                <div class="envelope-back"></div>
+                <img src="img/sobre.png" alt="Sobre de invitación" class="envelope-image">
+                <div class="envelope-glow"></div>
+                <div class="particles-container" id="particlesContainer"></div>
             </div>
         </div>
         <div class="instructions">
@@ -57,11 +58,15 @@
         <!-- Texto de la invitación -->
         <div class="invitation-text">
             <p class="invitation-line">Cumplir 15 años y compartirlo con los que amo es una manera de ser feliz y celebrar estos quince años que me han sido dados para fortalecer los dones que Dios me dio en todos los actos de mi vida.</p>
-            <p class="parents-name">Lesly Lucio y Jorge Lucio</p>
+            <div class="parents-name">
+                <p>Lesly Lucio</p>
+                <p class="conjunction">y</p>
+                <p>Jorge Capuñay</p>
+            </div>
             <p class="invitation-line">Se complacen en invitarles a celebrar los</p>
             <div class="xv-number">XV</div>
             <p class="invitation-line">De su adorada hija</p>
-            <h2 class="birthday-girl">Cielo Zharith Capuñay Lucio</h2>
+            <h2 class="birthday-girl">Zharith Capuñay Lucio</h2>
         </div>
 
         <!-- Countdown -->
@@ -113,7 +118,7 @@
                 </div>
                 <div class="calendar-days" id="calendarDays"></div>
             </div>
-            <p class="event-time">Sábado 4 de Octubre - 19:00 horas</p>
+            <p class="event-time">Sábado 4 de Octubre - 7:30 PM</p>
         </div>
 
         <!-- Ubicación -->
@@ -124,9 +129,9 @@
                 <div class="title-line"></div>
             </div>
             <div class="location-details">
-                <p><i class="fas fa-map-marker-alt"></i> Salón de Fiestas "Gardenias Blancas"</p>
-                <p><i class="fas fa-location-dot"></i> Av. de las Flores #1234, Col. Jardines</p>
-                <p><i class="fas fa-city"></i> Guadalajara, Jalisco</p>
+                <p><i class="fas fa-map-marker-alt"></i> La Cochera Campestre</p>
+                <p><i class="fas fa-location-dot"></i> Chimbote</p>
+                <p><i class="fas fa-city"></i> Áncash, Perú</p>
             </div>
             <button id="mapButton" class="map-btn">
                 <i class="fas fa-map-location-dot"></i> Ver ubicación en mapa
@@ -144,7 +149,7 @@
                 <div class="dress-code-images">
                     <img src="img/formal.png" alt="Vestimenta elegante formal" class="dress-image">
                 </div>
-                <p class="dress-code-title">Elegante - Formal</p>
+                <p class="dress-code-title">SPORT ELEGANTE</p>
                 <div class="color-restrictions">
                     <p>Colores no permitidos:</p>
                     <div class="forbidden-colors">
@@ -156,6 +161,9 @@
                         </div>
                         <div class="color-box" style="background-color: #ba68c8;">
                             <span>Lila</span>
+                        </div>
+                        <div class="color-box" style="background-color: #F8BBD9;">
+                            <span>Palorosa</span>
                         </div>
                     </div>
                 </div>
@@ -169,6 +177,7 @@
                 <h3>Nuestra Princesa</h3>
                 <div class="title-line"></div>
             </div>
+            <p class="rsvp-text">Hermosos recuerdos de nuestra niña</p>
             <div class="carousel-container">
                 <div class="carousel" id="carousel">
                     <!-- Las imágenes se agregarán con JavaScript -->
