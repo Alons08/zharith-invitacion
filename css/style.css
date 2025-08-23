@@ -590,6 +590,7 @@ h1, h2, h3 {
     color: var(--primary-dark);
     font-size: 2.2rem;
     margin-top: 15px;
+    margin-bottom: 22px; /* Separación extra debajo del nombre */
     position: relative;
     display: inline-block;
     font-family: 'Dancing Script', cursive;
