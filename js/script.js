@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar el countdown
     function initCountdown() {
-        const eventDate = new Date('October 4, 2025 19:30:00').getTime();
+        const eventDate = new Date('October 4, 2025 19:00:00').getTime();
         
         const countdown = setInterval(function() {
             const now = new Date().getTime();
